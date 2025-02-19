@@ -53,11 +53,6 @@ variable "vpc_id" {
   default = ""
 }
 
-
-variable "agriaku-division" {
-  default = ""
-}
-
 variable "specification" {
   default = "small"
 }
