@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:2.332.3-lts
+    container_name: jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ~/jenkins_home:/var/jenkins_home
+      - ./jenkins-casc.yaml:/var/jenkins_home/casc_configs/jenkins-casc.yaml
+      - ./plugins.txt:/usr/share/jenkins/ref/plugins.txt
+      - ./jenkins-cli.jar:/usr/share/jenkins/jenkins-cli.jar
+      # - ./install-plugins.sh:/usr/share/jenkins/install-plugins.sh
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins-casc.yaml
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    # command: /bin/bash -c "sleep 30 && ./usr/share/jenkins/install-plugins.sh" # Execute the bash script after 30 seconds
+volumes:
+  jenkins_home:

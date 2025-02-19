@@ -1,0 +1,6 @@
+1. Start the Jenkins container by running docker-compose up -d.
+2. Access the running Jenkins container using the command docker exec -it jenkins bash. This opens a shell session within the container.
+3. Run the Plugin CLI command to install the plugins: 
+  java -jar /usr/share/jenkins/jenkins-cli.jar -s http://localhost:8080/ install-plugin $(cat /usr/share/jenkins/ref/plugins.txt)
+  java -jar /usr/share/jenkins/jenkins-cli.jar -s http://localhost:8080/ -auth admin:admin install-plugin $(cat /usr/share/jenkins/ref/plugins.txt)
+4. Wait for the installation process to complete.
