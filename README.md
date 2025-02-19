@@ -22,7 +22,6 @@
 - **Others:** DNS, Network, Mail Server, Web Server, HAProxy  
 
 
-
 ## 📂 Table of Contents
 
 ### **1. Terraform**  
