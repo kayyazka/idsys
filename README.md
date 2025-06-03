@@ -29,7 +29,8 @@
 - **1.1.1 [VPC](https://github.com/kayyazka/idsys/tree/main/Terraform/AWS/vpc)**  
 - **1.1.2 [RDS](https://github.com/kayyazka/idsys/tree/main/Terraform/AWS/rds/)**  
 - **1.1.3 [EC2](https://github.com/kayyazka/idsys/tree/main/Terraform/AWS/ec2)**  
-- **1.1.4 [Amazon Elastic Kubernetes Service (EKS)](https://github.com/kayyazka/idsys/tree/main/Terraform/AWS/EKS)**  
+- **1.1.4 [Amazon Elastic Kubernetes Service (EKS)](https://github.com/kayyazka/idsys/tree/main/Terraform/AWS/EKS)** 
+- **1.1.5 [ECS](https://github.com/kayyazka/idsys/tree/main/Terraform/AWS/ECS)**
 
 #### **1.2 [GCP](https://github.com/kayyazka/gcp-terraform)**  
 - **1.2.1 [Network](https://github.com/kayyazka/idsys/tree/main/Terraform/GoogleCloud/network)**  

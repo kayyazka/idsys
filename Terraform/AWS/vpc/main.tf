@@ -71,7 +71,6 @@
 
  }
 
-
  # Create a Public Subnets.
  resource "aws_subnet" "publicsubnets" {  
    vpc_id                   = aws_vpc.main.id

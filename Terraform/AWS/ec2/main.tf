@@ -14,7 +14,6 @@
  
 
 
-
   root_block_device {
     volume_size           = var.root_disk
     volume_type           = var.root_disk_type
