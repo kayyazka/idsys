@@ -2,7 +2,7 @@
 resource "aws_security_group" "ecs_service_sg" {
   name        = format("%s-%s-ecs-security-group", var.name, var.environment)
   description = "Allow HTTP inbound traffic"
-  vpc_id      = "vpc-0a4ee73c259acfd58"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 80
@@ -80,7 +80,7 @@ resource "aws_launch_template" "ecs_lt" {
     name_prefix   = format("%s-%s-launch_template", var.name, var.environment)
     image_id     = var.image_id 
     instance_type = var.instance_type
-    key_name      = "infra-key"
+    key_name      = "ssh-key"
 
   iam_instance_profile {
     name = aws_iam_instance_profile.ecs_instance_profile.name
