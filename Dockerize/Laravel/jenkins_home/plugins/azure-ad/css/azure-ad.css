@@ -1,0 +1,11 @@
+td.azure-ad-controls {
+    text-align: left;
+}
+
+.no-graph-integration-wrapper {
+    margin-top: 1rem;
+}
+
+.azure-ad-validation-error {
+    margin-top: 0.5rem;
+}

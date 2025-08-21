@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 17
+Specification-Title: jQuery plugin
+Specification-Version: 1.12
+Implementation-Title: jQuery plugin
+Implementation-Version: 1.12.4-3
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: jquery
+Short-Name: jquery
+Long-Name: jQuery plugin
+Url: https://github.com/jenkinsci/jquery-plugin
+Plugin-Version: 1.12.4-3
+Hudson-Version: 2.440.3
+Jenkins-Version: 2.440.3
+Plugin-Developers: Kiyotaka Oku:kiy0taka:,Kohsuke Kawaguchi:kohsuke:
+Plugin-License-Name: MIT license
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/jquery-plugin
+ .git
+Plugin-ScmTag: jquery-1.12.4-3
+Plugin-ScmUrl: https://github.com/jenkinsci/jquery-plugin
+Plugin-GitHash: c671716da48387ce14d6ce4e306629be93cbfa00
+Implementation-Build: c671716da48387ce14d6ce4e306629be93cbfa00
+

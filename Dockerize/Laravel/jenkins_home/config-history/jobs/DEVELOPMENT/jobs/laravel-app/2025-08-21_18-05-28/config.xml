@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><flow-definition>
+    <actions/>
+    <description/>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <hudson.model.ParametersDefinitionProperty>
+            <parameterDefinitions>
+                <hudson.model.ChoiceParameterDefinition>
+                    <choices class="java.util.Arrays$ArrayList">
+                        <a class="string-array">
+                            <string>Release</string>
+                            <string>Restart</string>
+                        </a>
+                    </choices>
+                    <name>REQUESTED_ACTION</name>
+                    <description/>
+                </hudson.model.ChoiceParameterDefinition>
+                <hudson.model.StringParameterDefinition>
+                    <name>BRANCH</name>
+                    <defaultValue>main</defaultValue>
+                    <description>Git branch to build</description>
+                </hudson.model.StringParameterDefinition>
+            </parameterDefinitions>
+        </hudson.model.ParametersDefinitionProperty>
+    </properties>
+    <triggers/>
+    <logRotator>
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>10</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+    </logRotator>
+    <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition">
+        <script>
+node {
+    try {
+        stage('Checkout') {
+            checkout([$class: 'GitSCM',
+                branches: [[name: "${params.BRANCH}"]],
+                userRemoteConfigs: [[credentialsId: 'user-github', url: git_repo]]
+            ])
+        }
+
+        if (false) {
+            stage('Build Docker Image') {
+                sh """
+                docker buildx create --name mybuilder --use || true
+                docker buildx inspect --bootstrap
+                docker buildx build --platform linux/amd64,linux/arm64 -t yourdockerhubuser/laravel-app:${params.BRANCH}-${GIT_COMMIT} .
+                """
+            }
+        }
+
+        if (false) {
+            stage('Trivy Security Scan') {
+                sh """
+                if ! command -v trivy &amp;&gt; /dev/null; then
+                    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+                fi
+                trivy image --severity HIGH,CRITICAL --exit-code 1 yourdockerhubuser/laravel-app:${params.BRANCH}-${GIT_COMMIT}
+                """
+            }
+        }
+
+        if (false) {
+            stage('Push Docker Image') {
+                sh """
+                docker push yourdockerhubuser/laravel-app:${params.BRANCH}-${GIT_COMMIT}
+                """
+            }
+        }
+
+        if (false) {
+            stage('Test Docker Image') {
+                sh """
+                docker run --rm yourdockerhubuser/laravel-app:${params.BRANCH}-${GIT_COMMIT}                     php artisan test
+                """
+            }
+        }
+
+        if (false) {
+            stage('Run Docker Container') {
+                sh """
+                docker run -d --name laravel-app-test -p 8081:80 yourdockerhubuser/laravel-app:${params.BRANCH}-${GIT_COMMIT}
+                """
+            }
+        }
+
+    } catch (e) {
+        currentBuild.result = "FAILED"
+        throw e
+    }
+}
+</script>
+        <sandbox>true</sandbox>
+    </definition>
+</flow-definition>

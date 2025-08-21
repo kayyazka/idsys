@@ -1,0 +1,125 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@1400.v7fd111b_ec82f">
+  <actions>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>admin</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <jenkins.metrics.impl.TimeInQueueAction plugin="metrics@4.2.21-458.vcf496cb_839e4">
+      <queuingDurationMillis>76</queuingDurationMillis>
+      <blockedDurationMillis>0</blockedDurationMillis>
+      <buildableDurationMillis>0</buildableDurationMillis>
+      <waitingDurationMillis>21</waitingDurationMillis>
+    </jenkins.metrics.impl.TimeInQueueAction>
+    <org.jenkinsci.plugins.workflow.libs.LibrariesAction plugin="pipeline-groovy-lib@745.vdf6077913de0">
+      <libraries/>
+    </org.jenkinsci.plugins.workflow.libs.LibrariesAction>
+    <javaposse.jobdsl.plugin.actions.GeneratedJobsBuildAction plugin="job-dsl@1.87">
+      <modifiedObjects class="linked-hash-set">
+        <javaposse.jobdsl.dsl.GeneratedJob>
+          <jobName>DEVELOPMENT</jobName>
+        </javaposse.jobdsl.dsl.GeneratedJob>
+      </modifiedObjects>
+      <lookupStrategy>JENKINS_ROOT</lookupStrategy>
+    </javaposse.jobdsl.plugin.actions.GeneratedJobsBuildAction>
+    <javaposse.jobdsl.plugin.actions.GeneratedViewsBuildAction plugin="job-dsl@1.87">
+      <modifiedObjects class="linked-hash-set"/>
+      <lookupStrategy>JENKINS_ROOT</lookupStrategy>
+    </javaposse.jobdsl.plugin.actions.GeneratedViewsBuildAction>
+    <javaposse.jobdsl.plugin.actions.GeneratedConfigFilesBuildAction plugin="job-dsl@1.87">
+      <modifiedObjects class="linked-hash-set"/>
+    </javaposse.jobdsl.plugin.actions.GeneratedConfigFilesBuildAction>
+    <javaposse.jobdsl.plugin.actions.GeneratedUserContentsBuildAction plugin="job-dsl@1.87">
+      <modifiedObjects class="linked-hash-set"/>
+    </javaposse.jobdsl.plugin.actions.GeneratedUserContentsBuildAction>
+    <jenkins.metrics.impl.SubTaskTimeInQueueAction plugin="metrics@4.2.21-458.vcf496cb_839e4">
+      <queuingDurationMillis>21</queuingDurationMillis>
+      <blockedDurationMillis>0</blockedDurationMillis>
+      <buildableDurationMillis>19</buildableDurationMillis>
+      <waitingDurationMillis>0</waitingDurationMillis>
+      <executingDurationMillis>787</executingDurationMillis>
+      <workUnitCount>1</workUnitCount>
+    </jenkins.metrics.impl.SubTaskTimeInQueueAction>
+    <org.jenkins.plugins.lockableresources.actions.LockedResourcesBuildAction plugin="lockable-resources@1327.ved786b_a_197e0">
+      <logs/>
+      <resourcesInUse/>
+    </org.jenkins.plugins.lockableresources.actions.LockedResourcesBuildAction>
+  </actions>
+  <queueId>23</queueId>
+  <timestamp>1755799505524</timestamp>
+  <startTime>1755799505533</startTime>
+  <result>FAILURE</result>
+  <duration>1961</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <execution class="org.jenkinsci.plugins.workflow.cps.CpsFlowExecution">
+    <result>FAILURE</result>
+    <script>
+
+        node {
+            try {
+                stage(&apos;Create Folders&apos;) {
+                    jobDsl scriptText: &quot;folder(&apos;DEVELOPMENT&apos;)&quot;,
+                        ignoreExisting: true
+                }
+
+                stage(&apos;Create a Project&apos;) {
+                    jobDsl targets: &apos;job-pipelines/*.groovy&apos;,
+                    removedJobAction: &apos;DELETE&apos;,
+                    removedViewAction: &apos;DELETE&apos;,
+                    lookupStrategy: &apos;SEED_JOB&apos;,
+                    sandbox: false 
+                }
+
+            } catch (e) {
+                currentBuild.result = &quot;FAILED&quot;
+                throw e
+            }
+        }
+
+      </script>
+    <loadedScripts class="linked-hash-map"/>
+    <durabilityHint>MAX_SURVIVABILITY</durabilityHint>
+    <timings class="map">
+      <entry>
+        <string>flowNode</string>
+        <long>117402998</long>
+      </entry>
+      <entry>
+        <string>classLoad</string>
+        <long>406416020</long>
+      </entry>
+      <entry>
+        <string>runQueue</string>
+        <long>1313929585</long>
+      </entry>
+      <entry>
+        <string>run</string>
+        <long>1014215625</long>
+      </entry>
+      <entry>
+        <string>parse</string>
+        <long>635234501</long>
+      </entry>
+      <entry>
+        <string>saveProgram</string>
+        <long>537051668</long>
+      </entry>
+    </timings>
+    <internalCalls class="sorted-set"/>
+    <sandbox>true</sandbox>
+    <iota>17</iota>
+    <head>1:17</head>
+    <done>true</done>
+    <resumeBlocked>false</resumeBlocked>
+    <storageDir>workflow-completed</storageDir>
+  </execution>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList"/>
+</flow-build>

@@ -1,0 +1,19 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<javaposse.jobdsl.plugin.DescriptorImpl plugin="job-dsl@1.87">
+  <generatedJobMap class="concurrent-hash-map">
+    <entry>
+      <string>DEVELOPMENT</string>
+      <javaposse.jobdsl.plugin.SeedReference>
+        <seedJobName>JOB-DSL</seedJobName>
+        <digest>ed614962811919d04b88f9803e5b55bf</digest>
+      </javaposse.jobdsl.plugin.SeedReference>
+    </entry>
+    <entry>
+      <string>DEVELOPMENT/laravel-app</string>
+      <javaposse.jobdsl.plugin.SeedReference>
+        <seedJobName>JOB-DSL</seedJobName>
+        <digest>2f529bac3bc73fa46bf5b4868304901d</digest>
+      </javaposse.jobdsl.plugin.SeedReference>
+    </entry>
+  </generatedJobMap>
+</javaposse.jobdsl.plugin.DescriptorImpl>

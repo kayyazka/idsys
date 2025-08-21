@@ -1,0 +1,45 @@
+jenkins:
+  systemMessage: "Welcome to Jenkins configured by CASC"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+  authorizationStrategy: loggedInUsersCanDoAnything
+jobs:
+  - script: >
+      pipelineJob('JOB-DSL') {
+        definition {
+          cps {
+            script("""
+
+              node {
+                  try {
+                      stage('Create Folders') {
+                          jobDsl scriptText: "folder('DEVELOPMENT')",
+                              ignoreExisting: true
+                      }
+
+                      stage('Create a Project') {
+                          jobDsl targets: 'job-pipelines/*.groovy',
+                          removedJobAction: 'DELETE',
+                          removedViewAction: 'DELETE',
+                          lookupStrategy: 'SEED_JOB',
+                          sandbox: false 
+                      }
+
+                  } catch (e) {
+                      currentBuild.result = "FAILED"
+                      throw e
+                  }
+              }
+
+            """)
+            sandbox()
+          }
+        }
+        logRotator {
+          numToKeep 10
+        }
+      }
