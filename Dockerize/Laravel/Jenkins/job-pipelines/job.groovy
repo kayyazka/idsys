@@ -25,46 +25,36 @@ pipelineJob("${project_env}/${service}") {
                             ])
                         }
 
-                        stage('Build & Push Docker Image') {
+                        stage('Build  Docker Image') {
                             sh """                      
                             docker build -t kayyazka/laravel:latest -f \$WORKSPACE/Dockerize/Laravel/hello-world/Dockerfile  \$WORKSPACE/Dockerize/Laravel/hello-world/
                             """
                         }
                         
-                        if (false){
-                            stage('Trivy Security Scan') {
+                       
+                        stage('Unit Test') {
                                 sh """
-                                if ! command -v trivy &> /dev/null; then
-                                    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
-                                fi
-                                trivy image --severity HIGH,CRITICAL --exit-code 1 kayyazka/laravel-app:latest
+                                docker run --rm kayyazka/laravel:latest ./vendor/bin/phpunit
+                                docker run --rm kayyazka/laravel:latest php artisan test
                                 """
                             }
-                        }
+                        
 
-                        if (false) {
-                            stage('Push Docker Image') {
+                        
+                        stage('Push Docker Image') {
                                 sh """
-                                docker push kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}
+                                docker push kayyazka/laravel:latest
                                 """
                             }
-                        }
+                        
 
-                        if (false) {
-                            stage('Test Docker Image') {
+                        
+                        stage('Run Docker Container') {
                                 sh """
-                                docker run --rm kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}                                     php artisan test
+                                docker run -d --name laravel-app-test -p 8000:80 kayyazka/laravel:latest
                                 """
                             }
-                        }
-
-                        if (false) {
-                            stage('Run Docker Container') {
-                                sh """
-                                docker run -d --name laravel-app-test -p 8081:80 kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}
-                                """
-                            }
-                        }
+                        
 
                     } catch (e) {
                         currentBuild.result = "FAILED"

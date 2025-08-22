@@ -3,97 +3,26 @@
   <approvedScriptHashes>
     <string>SHA512:20303a488db586839fb5991c559c1741cf63c5b3b9d8694745aa85be8769664fecbf5980718dada1a4799348a97c3e450fe89cfbf21dd1847e02518ac49e0f73</string>
     <string>SHA512:2fd323f1147a4e150754d4a1711f3f163b4b947434a2935dbd2f6ef777aebebeb107f844e284f7739dc026fcc58883aa1754cf5c3dfe6ed9c7f9dbf8be7efadb</string>
+    <string>SHA512:39f84cfb53fced600b21ce0adac4803facc471b14be21aacb0d037ea7daf914ca4ac1aa76a488cfe626328b4b5bafc7d221d545737abd6b3fc1ea4fc01723b11</string>
     <string>SHA512:63e00674fa40f18501a4868a5807579fe0addad6b3ddf29dafb48e52cf1d0430cddff0ec547b3981776dee6312799ee5253ecfcdd7fcf3d7c970a6440ce06f40</string>
     <string>SHA512:6a936adfdbc45de60243f4c60229f36db4faca86806a7149dc84acbeacf409323e6c62a25a8cabf9b124a1473f0176b559ea416c694f2b202fa37b2b63fd56c4</string>
+    <string>SHA512:b4421a2de1357e2ddb3a0ff3989a3f767b8c6fa81ca6ae5232e51df7982167a58f8d474bf418f8e2f08939afe3309bb6787462ab7ff591c05ffb5dd00d421958</string>
     <string>SHA512:bf27fdad947dce6f1d9fdc08e3176949c01194574f0627b57261cdb40fef257fc10f3e8fa58711cd329437b840735e3c26a03f8fb54c8bfbd058051200fedb4a</string>
+    <string>SHA512:cc3265ec9ee3969b89cdd0735ed33b2f42b348daa77f805120fdcfe123080ec31a3a6f4a93b9494418d32e832738353a0cbb9f6b48795e6f7ec1a30afec0af74</string>
     <string>SHA512:d07d157f51254fb9b41c38e86a0449fcaba2f6df5bab6d66b111620c808892d190bf43148ac3a6f69cfc1685972ae43a33b1a0767be0357968b8a632fab7a9ce</string>
     <string>SHA512:d0e6bf2f2d57ad0fbd34336171f32d4f86789d1934de56560778024aad9bc89769ac2a1da6158d0b43efe69c68ad10f39075806127bc8186c6e995f9f9e99aa5</string>
+    <string>SHA512:dca9687f5fb532e43d5cdaa49cf738279606c6dea7971e8a1df323d71f77afb769b5835089379f7dc447b92c67e1f9644d4a3fa3a738e77f86ad8641b751db46</string>
+    <string>SHA512:eea480cd37946557da0ccf0a5f8d8a9d01ed14d2685769ab75672fd983eeb5ba37fa4b6a50d2f8fc1896f5e6387166cdd117bf628364f4f5da49ab269c8add85</string>
     <string>SHA512:efeac3d0a05d3a1edfc5a1023a0da5b7ade9379de55f3b13be64d525ce98ec66c58ba0cbcc671b45452f7de60732312c014e95c9a50a57390a92b704b98c0f23</string>
     <string>SHA512:f0f053790a98b5d57e51704fed243dfb667ce1409b3cd28c73b96d030f787dba3c1557b41e8d0d3d3a59981d1f98de12013c9cf55fdcf3579da00e76aa33f823</string>
     <string>SHA512:f17c088533d06bdc5d7961aa434c20ac4505737e5402954b915502c857e653bf161625176e01855b89666a4c456faf2886213a7c7e6375f32d9284f8a15770e2</string>
+    <string>SHA512:f1a01ee6294287e334590aa1903bbc4cff5dc65658a9d62057601bed63c94de96be1cbd31c8d3a2d4c106aff0c17744f4f39592c10defbc0a0adf47b3e343db0</string>
   </approvedScriptHashes>
   <approvedSignatures/>
   <aclApprovedSignatures/>
   <approvedClasspathEntries/>
   <forceSandbox>false</forceSandbox>
-  <pendingScripts>
-    <pendingScript>
-      <context>
-        <user>admin</user>
-        <item>DEVELOPMENT/laravel-app</item>
-        <key>DEVELOPMENT/laravel-app</key>
-      </context>
-      <script>
-                node {
-                    try {
-                        stage(&apos;Checkout&apos;) {
-                            checkout([$class: &apos;GitSCM&apos;,
-                                branches: [[name: &quot;main&quot;]],
-                                doGenerateSubmoduleConfigurations: false,
-                                extensions: [],
-                                userRemoteConfigs: [[
-                                    url: &apos;https://github.com/kayyazka/idsys&apos;
-                                ]]
-                            ])
-                        }
-
-                        stage(&apos;Build &amp; Push Docker Image&apos;) {
-                            sh &quot;&quot;&quot;
-                                                     
-                                docker build -t kayyazka/laravel:latest \
-                              -f \$WORKSPACE/Dockerize/Laravel/hello-world/Dockerfile \
-                              \$WORKSPACE/Dockerize/Laravel/hello-world/
-
-        
-
-                            &quot;&quot;&quot;
-                        }
-
-                        {
-                            stage(&apos;Trivy Security Scan&apos;) {
-                                sh &quot;&quot;&quot;
-                                if ! command -v trivy &amp;&gt; /dev/null; then
-                                    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
-                                fi
-                                trivy image --severity HIGH,CRITICAL --exit-code 1 kayyazka/laravel-app:latest
-                                &quot;&quot;&quot;
-                            }
-                        }
-
-                        if (false) {
-                            stage(&apos;Push Docker Image&apos;) {
-                                sh &quot;&quot;&quot;
-                                docker push kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}
-                                &quot;&quot;&quot;
-                            }
-                        }
-
-                        if (false) {
-                            stage(&apos;Test Docker Image&apos;) {
-                                sh &quot;&quot;&quot;
-                                docker run --rm kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}                                     php artisan test
-                                &quot;&quot;&quot;
-                            }
-                        }
-
-                        if (false) {
-                            stage(&apos;Run Docker Container&apos;) {
-                                sh &quot;&quot;&quot;
-                                docker run -d --name laravel-app-test -p 8081:80 kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}
-                                &quot;&quot;&quot;
-                            }
-                        }
-
-                    } catch (e) {
-                        currentBuild.result = &quot;FAILED&quot;
-                        throw e
-                    }
-                }
-
-</script>
-      <language>groovy</language>
-    </pendingScript>
-  </pendingScripts>
+  <pendingScripts/>
   <pendingSignatures/>
   <pendingClasspathEntries/>
 </scriptApproval>

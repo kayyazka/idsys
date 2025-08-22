@@ -12,7 +12,7 @@
       <string>DEVELOPMENT/laravel-app</string>
       <javaposse.jobdsl.plugin.SeedReference>
         <seedJobName>JOB-DSL</seedJobName>
-        <digest>cc09803cc6eb36bf6c4357aaec0628aa</digest>
+        <digest>1e9afe1be6b23207eb4ded603e5cfc5a</digest>
       </javaposse.jobdsl.plugin.SeedReference>
     </entry>
   </generatedJobMap>
