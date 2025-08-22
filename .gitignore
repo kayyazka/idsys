@@ -1,5 +1,5 @@
 # Ignore everything in Dockerize/Laravel/Jenkins
-/Dockerize/Laravel/Jenkins/*
+Dockerize/Laravel/Jenkins/*
 
 # But keep the folder by adding a placeholder
-!/Dockerize/Laravel/Jenkins/.gitkeep
+!Dockerize/Laravel/Jenkins/.gitkeep
