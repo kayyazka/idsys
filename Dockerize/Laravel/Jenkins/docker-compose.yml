@@ -17,5 +17,5 @@ services:
       - ./plugins.txt:/usr/share/jenkins/ref/plugins.txt
       - ./install-plugins.sh:/usr/local/bin/install-plugins.sh
       - ./job-pipelines:/var/jenkins_home/workspace/JOB-DSL/job-pipelines
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock 
     command: ["/bin/bash", "/usr/local/bin/install-plugins.sh"]

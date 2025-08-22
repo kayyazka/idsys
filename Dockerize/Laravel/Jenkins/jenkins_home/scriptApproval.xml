@@ -1,15 +1,99 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <scriptApproval plugin="script-security@1369.v9b_98a_4e95b_2d">
   <approvedScriptHashes>
+    <string>SHA512:20303a488db586839fb5991c559c1741cf63c5b3b9d8694745aa85be8769664fecbf5980718dada1a4799348a97c3e450fe89cfbf21dd1847e02518ac49e0f73</string>
+    <string>SHA512:2fd323f1147a4e150754d4a1711f3f163b4b947434a2935dbd2f6ef777aebebeb107f844e284f7739dc026fcc58883aa1754cf5c3dfe6ed9c7f9dbf8be7efadb</string>
+    <string>SHA512:63e00674fa40f18501a4868a5807579fe0addad6b3ddf29dafb48e52cf1d0430cddff0ec547b3981776dee6312799ee5253ecfcdd7fcf3d7c970a6440ce06f40</string>
     <string>SHA512:6a936adfdbc45de60243f4c60229f36db4faca86806a7149dc84acbeacf409323e6c62a25a8cabf9b124a1473f0176b559ea416c694f2b202fa37b2b63fd56c4</string>
-    <string>SHA512:8eaf799a7eed0739efac8138bbd33e21a557c31f9d810502e6285f2fd7745d2779c07cb9bed0711168892287fe9efc3862c542d9436afc44f521fe50c76a9ce9</string>
-    <string>SHA512:aeb84300c3c1bc4495e3d05991be3877992e886e57942f8eeb4466b61b6bff38c2d4a83541bd365d585d70670e975fc3b7d758e782461f192dbaa5777b591046</string>
+    <string>SHA512:bf27fdad947dce6f1d9fdc08e3176949c01194574f0627b57261cdb40fef257fc10f3e8fa58711cd329437b840735e3c26a03f8fb54c8bfbd058051200fedb4a</string>
+    <string>SHA512:d07d157f51254fb9b41c38e86a0449fcaba2f6df5bab6d66b111620c808892d190bf43148ac3a6f69cfc1685972ae43a33b1a0767be0357968b8a632fab7a9ce</string>
+    <string>SHA512:d0e6bf2f2d57ad0fbd34336171f32d4f86789d1934de56560778024aad9bc89769ac2a1da6158d0b43efe69c68ad10f39075806127bc8186c6e995f9f9e99aa5</string>
+    <string>SHA512:efeac3d0a05d3a1edfc5a1023a0da5b7ade9379de55f3b13be64d525ce98ec66c58ba0cbcc671b45452f7de60732312c014e95c9a50a57390a92b704b98c0f23</string>
+    <string>SHA512:f0f053790a98b5d57e51704fed243dfb667ce1409b3cd28c73b96d030f787dba3c1557b41e8d0d3d3a59981d1f98de12013c9cf55fdcf3579da00e76aa33f823</string>
+    <string>SHA512:f17c088533d06bdc5d7961aa434c20ac4505737e5402954b915502c857e653bf161625176e01855b89666a4c456faf2886213a7c7e6375f32d9284f8a15770e2</string>
   </approvedScriptHashes>
   <approvedSignatures/>
   <aclApprovedSignatures/>
   <approvedClasspathEntries/>
   <forceSandbox>false</forceSandbox>
-  <pendingScripts/>
+  <pendingScripts>
+    <pendingScript>
+      <context>
+        <user>admin</user>
+        <item>DEVELOPMENT/laravel-app</item>
+        <key>DEVELOPMENT/laravel-app</key>
+      </context>
+      <script>
+                node {
+                    try {
+                        stage(&apos;Checkout&apos;) {
+                            checkout([$class: &apos;GitSCM&apos;,
+                                branches: [[name: &quot;main&quot;]],
+                                doGenerateSubmoduleConfigurations: false,
+                                extensions: [],
+                                userRemoteConfigs: [[
+                                    url: &apos;https://github.com/kayyazka/idsys&apos;
+                                ]]
+                            ])
+                        }
+
+                        stage(&apos;Build &amp; Push Docker Image&apos;) {
+                            sh &quot;&quot;&quot;
+                                                     
+                                docker build -t kayyazka/laravel:latest \
+                              -f \$WORKSPACE/Dockerize/Laravel/hello-world/Dockerfile \
+                              \$WORKSPACE/Dockerize/Laravel/hello-world/
+
+        
+
+                            &quot;&quot;&quot;
+                        }
+
+                        {
+                            stage(&apos;Trivy Security Scan&apos;) {
+                                sh &quot;&quot;&quot;
+                                if ! command -v trivy &amp;&gt; /dev/null; then
+                                    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+                                fi
+                                trivy image --severity HIGH,CRITICAL --exit-code 1 kayyazka/laravel-app:latest
+                                &quot;&quot;&quot;
+                            }
+                        }
+
+                        if (false) {
+                            stage(&apos;Push Docker Image&apos;) {
+                                sh &quot;&quot;&quot;
+                                docker push kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}
+                                &quot;&quot;&quot;
+                            }
+                        }
+
+                        if (false) {
+                            stage(&apos;Test Docker Image&apos;) {
+                                sh &quot;&quot;&quot;
+                                docker run --rm kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}                                     php artisan test
+                                &quot;&quot;&quot;
+                            }
+                        }
+
+                        if (false) {
+                            stage(&apos;Run Docker Container&apos;) {
+                                sh &quot;&quot;&quot;
+                                docker run -d --name laravel-app-test -p 8081:80 kayyazka/laravel-app:${params.BRANCH}-${GIT_COMMIT}
+                                &quot;&quot;&quot;
+                            }
+                        }
+
+                    } catch (e) {
+                        currentBuild.result = &quot;FAILED&quot;
+                        throw e
+                    }
+                }
+
+</script>
+      <language>groovy</language>
+    </pendingScript>
+  </pendingScripts>
   <pendingSignatures/>
   <pendingClasspathEntries/>
 </scriptApproval>
