@@ -192,6 +192,7 @@ docker logs -f jenkins
 4. Run the pipeline:
    - Pass Unit Tests → Docker image is pushed & container runs
    - Fail Unit Tests → pipeline stops, no push or deploy
+  ![Deskripsi Gambar](test.png)
 5. Access Laravel application at `http://<server-ip>:8000`
 
 ---
