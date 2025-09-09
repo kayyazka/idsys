@@ -52,17 +52,18 @@ Infrastructure Engineer with 13 years of professional experience, including 11 y
 - **2.2 [Pipelines](https://github.com/kayyazka/idsys/tree/main/Jenkins/Pipelines)**  
 
 ### **3. [GitLab](https://github.com/kayyazka/idsys/tree/main/GitLab)**  
-- **3.1 [gitlab-ci](https://github.com/kayyazka/idsys/tree/main/GitLab)**  
+- **3.1 [gitlab-ci gcloud run](https://github.com/kayyazka/idsys/tree/main/GitLab)**  
 
-### **2.2 [GitHub](https://github.com/kayyazka/github-actions)**  
+### **4 [GitHub](https://github.com/kayyazka/github-actions)**  
+- **4.1 [github-action Terraform Apply for ECS](https://github.com/kayyazka/idsys/blob/main/Github/terraform-apply-ecs.yml)**
  
 
 ---
 
-### **3. Kubernetes**  
-#### **3.1 [Helm & Kustomize](https://github.com/kayyazka/helm-kustomize)**  
-- **3.1.1 [Helm Chart for Application Deployment](https://github.com/kayyazka/helm-charts)**  
-- **3.1.2 [Kustomize for Configuration Management](https://github.com/kayyazka/kustomize-config)**  
+### **5. Kubernetes**  
+#### **5.1 [Helm & Kustomize](https://github.com/kayyazka/helm-kustomize)**  
+- **5.1.1 [Helm Chart for Application Deployment](https://github.com/kayyazka/helm-charts)**  
+- **5.1.2 [Kustomize for Configuration Management](https://github.com/kayyazka/kustomize-config)**  
 
 ## 📫 Connect with Me
 [LinkedIn](https://www.linkedin.com/in/agussulaiman/)  | [GitHub](https://github.com/kayyazka/idsys.git)
