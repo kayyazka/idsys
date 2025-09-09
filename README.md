@@ -52,7 +52,7 @@ Infrastructure Engineer with 13 years of professional experience, including 11 y
 - **2.2 [Pipelines](https://github.com/kayyazka/idsys/tree/main/Jenkins/Pipelines)**  
 
 ### **3. [GitLab](https://github.com/kayyazka/idsys/tree/main/GitLab)**  
-- **3.1 [gitlab-ci gcloud run](https://github.com/kayyazka/idsys/tree/main/GitLab)**  
+- **3.1 [gitlab-ci gcloud run](https://github.com/kayyazka/idsys/blob/main/GitLab/.gitlab-ci.yml)**  
 
 ### **4 [GitHub](https://github.com/kayyazka/github-actions)**  
 - **4.1 [github-action Terraform Apply for ECS](https://github.com/kayyazka/idsys/blob/main/Github/terraform-apply-ecs.yml)**
